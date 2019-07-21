@@ -6,7 +6,7 @@ A interface permite ao usuário inserir um texto com letras maiúsculas e minús
 
 ### Resultado Final:
 
-![Print da tela do projeto Cifra de César](.src/assets/print-tela.png)
+![Print da tela do projeto Cifra de César](https://github.com/camebastos/caesar-cipher/blob/master/src/assets/print-tela.png?raw=true)
 
 ## Introdução
 
@@ -33,4 +33,4 @@ criptografia, como a cifra de Vigenère, e tem aplicação no sistema ROT13.
 
 ## Fluxograma
 
-![Fluxograma](src/assets/fluxograma-cipher.png)
+![Fluxograma](https://github.com/camebastos/caesar-cipher/blob/master/src/assets/fluxograma-cipher.png?raw=true)
