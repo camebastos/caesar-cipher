@@ -1,52 +1,53 @@
-//window.cipher = {
-  // ...
-//};
-function cypher (txt, desloc) {
-let arrayTxt = txt.split(''); //devolve [ 'a', 'b', 'c' ]
-let arrayTxtDesloc = [];
-//let arrayTxtDesloc = arrayTxt.fromCharCode(i);
+let charCodeNum = 0;
+let letterCiphered = 0;
 
+function result(buttonId) {
+  const message = document.getElementById('msg').value;
+  const offset = parseInt(document.getElementById('offset').value);
+  const messageCiphered = encode(message, offset);
+  const messageDeciphered = decode(messageCiphered, offset);
 
-for (let i = 0; i < txt.length; i++) {
-  //arrayTxt = txt.charCodeAt(i);
-
-  //desloc = txt.charCodeAt(i);
-  //arrayTxt += String.fronCharCode(desloc);
-
-  //console.log(arrayTxt[i]); //devolve indices do array
-  //console.log(arrayTxt[i].charCodeAt(0)); //devolve indice e valor ASC
-  arrayTxtDesloc.push(((arrayTxt[i].charCodeAt(0) - 65 + desloc) %26) +65); //só funciona para maiuscula
-
-  arrayTxtDesloc.push(((arrayTxt[i].charCodeAt(0) - 97 + desloc) %26) +97); //só funciona para minuscula
-
-  let criptografia = String.fromCharCode(arrayTxtDesloc[i]);
-
-  console.log(criptografia);
-  document.write(criptografia);
-
-
-  //console.log(arrayTxtDesloc);
+  if (buttonId === 'encode') {
+    document.getElementById('messageCiphered').innerHTML = messageCiphered;
+  } else {
+    document.getElementById('messageDeciphered').innerHTML = messageDeciphered;
+  }
 }
 
-return criptografia;
+function encode(message, offset) {
+  let cipheredMessage = [];
 
+  for (let i = 0; i < message.length; i++) {
+    charCodeNum = message[i].charCodeAt();
+    if (charCodeNum >= 65 && charCodeNum <= 90) {
+      letterCiphered = (charCodeNum - 65 + offset) % 26 + 65;
+      cipheredMessage.push(String.fromCharCode(letterCiphered));
+    } else if (charCodeNum >= 97 && charCodeNum <= 122) {
+      letterCiphered = (charCodeNum - 97 + offset) % 26 + 97;
+      cipheredMessage.push(String.fromCharCode(letterCiphered));
+    } else if (charCodeNum === 32) {
+      letterCiphered = 35;
+      cipheredMessage.push(String.fromCharCode(letterCiphered));
+    }
+  }
+  return cipheredMessage.join('');
 }
 
-console.log(cypher('abc', 1))
+function decode(message, offset) {
+  let decipheredMessage = [];
 
-
-
-
-//
-
-
-//transformar str em array ok
-//chamar codigo asc do array OK
-//retornar ASC de todos os indices do array (andar e retornar o valor asc de cada indice do array) ok
-//fazer funcionar para minuscula ok
-//retornar o cod numerico asc gerado pelo charCodeAt em letra com string.fromChar
-
-//explicar para o programa se a letra é maiuscula ou minuscula
-//criar variavel com o retorno em asc para usar na conta do deslocamento
-//deslocar cada letra do array pelo parametro num
-//criar um novo array com já alterado pelo parametro
+  for (let i = 0; i < message.length; i++) {
+    charCodeNum = message[i].charCodeAt();
+    if (charCodeNum >= 65 && charCodeNum <= 90) {
+      letterDeciphered = (charCodeNum - 90 - offset) % 26 + 90;
+      decipheredMessage.push(String.fromCharCode(letterDeciphered));
+    } else if (charCodeNum >= 97 && charCodeNum <= 122) {
+      letterDeciphered = (charCodeNum - 122 - offset) % 26 + 122;
+      decipheredMessage.push(String.fromCharCode(letterDeciphered));
+    } else if (charCodeNum === 35) {
+      letterDeciphered = 32;
+      decipheredMessage.push(String.fromCharCode(letterDeciphered));
+    }
+  }
+  return decipheredMessage.join('');
+}
